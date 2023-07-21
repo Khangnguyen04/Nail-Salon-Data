@@ -1,0 +1,70 @@
+--- View the data
+
+SELECT * FROM nail_salon_data
+
+
+--- How many cities are in the dataset?
+
+SELECT 
+	COUNT(DISTINCT location_city) as cities
+FROM nail_salon_data
+
+
+--- Which cities are in the dataset?
+
+SELECT * FROM cities
+
+
+--- Find the highest rated salons in each city with over 4 stars and 50 reviews
+
+SELECT 
+	salon_name,
+	location_city,
+	ROUND(AVG(rating_out_of_5),1) AS rating_out_of_5,
+	ratings
+FROM nail_salon_data
+WHERE rating_out_of_5 >= 4
+AND ratings >= 50 AND location_city = 'Westlake' --- Change city to see the highest rated salons
+GROUP BY salon_name, ratings, location_city
+ORDER BY location_city, rating_out_of_5 DESC
+
+--- Find the cheapest salon in each city
+--- This query only outputs salons that have every service type listed
+
+SELECT
+	salon_name,
+	location_city,
+	AVG(a.price) AS acrl_price,
+	AVG(r.price) AS reg_avg_price,
+	AVG(g.price) AS gel_avg_price,
+	AVG(d.price) AS dip_avg_price,
+	ROUND(AVG(p.price),2) AS feet_avg_price
+FROM nail_salon_data ns
+	JOIN acrylic a
+		ON ns.acrl_id = a.acrl_id
+	JOIN reg r
+		ON ns.reg_id = r.reg_id
+	JOIN gel g
+		ON ns.gel_id = g.gel_id
+	JOIN dip d
+		ON ns.dip_id = d.dip_id
+	JOIN pedi p 
+		ON ns.pedi_id = p.pedi_id
+WHERE location_city = 'Westlake' --- Change the city to see different results
+GROUP BY salon_name, location_city
+ORDER BY acrl_price, reg_avg_price, gel_avg_price, dip_avg_price, feet_avg_price
+
+
+--- Which city has the most salons? And does population size have a correlation with salons in the area?
+
+SELECT 
+	location_city,
+	COUNT(salon_name) salons,
+	AVG(pop) population
+FROM nail_salon_data ns
+	JOIN cities c
+		ON ns.city_id = c.city_id
+GROUP BY location_city
+ORDER BY salons DESC
+
+--- With our query, we can determine that population size does have a positive correlation with the number of salons in the city
