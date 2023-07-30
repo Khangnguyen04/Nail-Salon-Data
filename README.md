@@ -8,7 +8,7 @@ My family has owned a local nail salon for the past six years, and I wanted to d
 
 ## Objective
 
-Collect data on nail salons in Northeast Ohio to find the highest-rated salons in each city to find the highest-rated salons, the price range of services, and if population density correlates with the number of salons in the city.
+Collect data on nail salons in Northeast Ohio to find the highest-rated salons in each city, the price range of services, and if population density correlates with the number of salons in the city.
 
 ## Data Source and Collection
 
