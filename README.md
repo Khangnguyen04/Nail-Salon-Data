@@ -24,7 +24,7 @@ The Excel file can be found in a separate file in this repo
 
 * Import data into SQL Server
 * Insights:
-  * How many cities are in the data and what cities they?
+  * How many cities are in the data and what cities are they?
   * Highest-rated salons with four or more stars and 50 or more reviews?
   * Cheapest salon in each city
   * The city with the most salons
